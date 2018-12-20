@@ -25,7 +25,9 @@ dataOut = ''.join(str(k) for k in dataOut)
 
 
 fileOut =open("decrypt.txt", "w")
-fileOut.write(dataOut)
+try:
+    fileOut.write(dataOut)
+except: print("Incorrect key!")
 fileOut.close()
 
 print(dataOut)
