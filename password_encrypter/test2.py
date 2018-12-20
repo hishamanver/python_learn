@@ -8,23 +8,25 @@ key = input("Input key: ")
 encryptionKey = generateEncryptionKey(key)
 # print(encryptionKey)
 
-fileIn = open("testdata.txt")
+fileIn = open("crypt.txt")
 data = (fileIn.read())
 fileIn.close()
 
 dataOut = []
 
-for j in range(0,len(data),len(encryptionKey)):
+for j in range(0,len(data),3*len(encryptionKey)):
     for k in range(len(encryptionKey)):
         try:
-            dataOut = dataOut + [ord(data[j+k])+encryptionKey[k]+255] 
+            dataOut = dataOut + [chr(int(data[j+k*3]+data[j+1+k*3]+data[j+2+k*3])-encryptionKey[k]-255)]   
         except:
             continue
 
 dataOut = ''.join(str(k) for k in dataOut)
 
-fileOut =open("crypt.txt", "w")
+
+fileOut =open("decrypt.txt", "w")
 fileOut.write(dataOut)
 fileOut.close()
 
 print(dataOut)
+
